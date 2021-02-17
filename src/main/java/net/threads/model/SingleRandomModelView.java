@@ -7,7 +7,7 @@ import java.util.List;
 public class SingleRandomModelView implements BallModelView {
     @Override
     public List<Ball> getBalls() {
-        return Collections.singletonList(new Ball(randomColor(), 25, 50,50));
+        return Collections.singletonList(new Ball(randomColor(), 25, 50,50, 0, 0));
     }
 
     private Color randomColor() {
