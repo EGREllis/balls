@@ -19,7 +19,7 @@ public class App
 
         try {
             Thread.sleep(DELAY);
-            Thread ticker = new Thread(new TickerRunnable(500L, new AnimatingTickerListener(view.getJFrame())));
+            Thread ticker = new Thread(new TickerRunnable(500L, new AnimatingTickerListener(view.getCanvas())));
             ticker.start();
         } catch (InterruptedException ie) {
             System.err.println(ie.getMessage());

@@ -7,10 +7,10 @@ import java.awt.*;
 import java.lang.reflect.InvocationTargetException;
 
 public class AnimatingTickerListener implements TickerListener {
-    private final Container container;
+    private final Component component;
 
-    public AnimatingTickerListener(Container container) {
-        this.container = container;
+    public AnimatingTickerListener(Component component) {
+        this.component = component;
     }
 
     @Override
@@ -18,8 +18,8 @@ public class AnimatingTickerListener implements TickerListener {
         try {
             SwingUtilities.invokeAndWait(new Runnable() {
                 public void run() {
-                    Graphics g = container.getGraphics();
-                    container.update(g);
+                    Graphics g = component.getGraphics();
+                    component.update(g);
                 }
             });
         } catch (InterruptedException | InvocationTargetException e) {
