@@ -5,7 +5,6 @@ import net.threads.model.BallModelView;
 
 import java.awt.Canvas;
 import java.awt.Graphics;
-import java.awt.Rectangle;
 
 import java.util.List;
 
@@ -25,9 +24,5 @@ public class BallsCanvas extends Canvas {
             graphics.setColor(ball.getColor());
             graphics.drawOval(x, y, size, size);
         }
-    }
-
-    public void triggerRepaint() {
-        repaint();
     }
 }

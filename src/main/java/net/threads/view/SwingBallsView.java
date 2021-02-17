@@ -2,11 +2,13 @@ package net.threads.view;
 
 import net.threads.model.BallModelView;
 import net.threads.model.SingleRandomModelView;
+import net.threads.time.TickerListener;
 
 import javax.swing.*;
 import java.awt.*;
+import java.lang.reflect.InvocationTargetException;
 
-public class SwingBallsView implements Runnable {
+public class SwingBallsView implements Runnable, TickerListener {
     private JFrame jFrame;
     private BallsCanvas canvas;
 
@@ -36,5 +38,20 @@ public class SwingBallsView implements Runnable {
 
     public JFrame getJFrame() {
         return jFrame;
+    }
+
+    @Override
+    public void tick() {
+        try {
+            SwingUtilities.invokeAndWait(new Runnable() {
+                public void run() {
+                    Graphics graphics = canvas.getGraphics();
+                    canvas.update(graphics);
+                }
+            });
+        } catch (InterruptedException | InvocationTargetException e) {
+            System.err.println(e.getMessage());
+            e.printStackTrace(System.err);
+        }
     }
 }
