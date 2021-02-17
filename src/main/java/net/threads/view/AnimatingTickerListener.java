@@ -3,13 +3,14 @@ package net.threads.view;
 import net.threads.time.TickerListener;
 
 import javax.swing.*;
+import java.awt.*;
 import java.lang.reflect.InvocationTargetException;
 
 public class AnimatingTickerListener implements TickerListener {
-    private final BallsCanvas canvas;
+    private final Container container;
 
-    public AnimatingTickerListener(BallsCanvas canvas) {
-        this.canvas = canvas;
+    public AnimatingTickerListener(Container container) {
+        this.container = container;
     }
 
     @Override
@@ -17,7 +18,8 @@ public class AnimatingTickerListener implements TickerListener {
         try {
             SwingUtilities.invokeAndWait(new Runnable() {
                 public void run() {
-                    canvas.triggerRepaint();
+                    Graphics g = container.getGraphics();
+                    container.update(g);
                 }
             });
         } catch (InterruptedException | InvocationTargetException e) {

@@ -1,5 +1,8 @@
 package net.threads.view;
 
+import net.threads.model.BallModelView;
+import net.threads.model.SingleRandomModelView;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -17,8 +20,9 @@ public class SwingBallsView implements Runnable {
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setLayout(new BorderLayout());
 
-        this.canvas = new BallsCanvas();
-        canvas.setBackground(new Color(254, 0, 0));
+        BallModelView modelView = new SingleRandomModelView();
+        this.canvas = new BallsCanvas(modelView);
+        canvas.setBackground(new Color(0, 0, 0));
         canvas.setBounds(new Rectangle(100, 100, 200, 200));
         jFrame.add(canvas, BorderLayout.CENTER);
 
@@ -28,5 +32,9 @@ public class SwingBallsView implements Runnable {
 
     public BallsCanvas getCanvas() {
         return canvas;
+    }
+
+    public JFrame getJFrame() {
+        return jFrame;
     }
 }
