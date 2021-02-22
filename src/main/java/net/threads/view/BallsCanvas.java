@@ -16,7 +16,7 @@ public class BallsCanvas extends Canvas {
     }
 
     public void paint(Graphics graphics) {
-        List<Ball> balls = modelView.getBalls();
+        List<Ball> balls = modelView.getBallState().getBalls();
         for (Ball ball : balls) {
             int x = (int)(ball.getCx() - ball.getRadius());
             int y = (int)(ball.getCy() - ball.getRadius());

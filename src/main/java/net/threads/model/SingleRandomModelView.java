@@ -2,12 +2,17 @@ package net.threads.model;
 
 import java.awt.*;
 import java.util.Collections;
-import java.util.List;
 
 public class SingleRandomModelView implements BallModelView {
+    private final Bounds bounds;
+
+    public SingleRandomModelView(Bounds bounds) {
+        this.bounds = bounds;
+    }
+
     @Override
-    public List<Ball> getBalls() {
-        return Collections.singletonList(new Ball(randomColor(), 25, 50,50, 0, 0));
+    public BallState getBallState() {
+        return new BallState(Collections.singletonList(new Ball(randomColor(), 25, 50,50, 0, 0)), bounds);
     }
 
     private Color randomColor() {
