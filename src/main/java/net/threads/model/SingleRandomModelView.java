@@ -23,4 +23,9 @@ public class SingleRandomModelView implements BallModelView {
     private int randomPigment() {
         return (int)(Math.random() * 255);
     }
+
+    @Override
+    public void tick() {
+        // ignore this (random colored ball does not advance)
+    }
 }

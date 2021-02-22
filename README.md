@@ -1,5 +1,5 @@
 Todo:
-Change the drawing update to only update on tick - explicitly not to advance the balls on bounds resize.
+DONE 2021/02/22 03:49 - Change the drawing update to only update on tick - explicitly not to advance the balls on bounds resize.
 Implement bounds checking on external bounds - if the window is enlarged, balls should only rebound on the enlarged bound.
 Implement bounds checking on external bounds - if the window is shrunk, move the ball to remain within the window.
 Implement collision detection on circles - detect collisions

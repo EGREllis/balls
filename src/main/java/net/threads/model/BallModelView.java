@@ -1,5 +1,7 @@
 package net.threads.model;
 
-public interface BallModelView {
+import net.threads.time.TickerListener;
+
+public interface BallModelView extends TickerListener {
     BallState getBallState();
 }

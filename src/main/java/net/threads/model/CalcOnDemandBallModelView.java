@@ -11,7 +11,12 @@ public class CalcOnDemandBallModelView implements BallModelView {
 
     @Override
     public BallState getBallState() {
-        seed = calculator.advance(seed);
         return seed;
+    }
+
+    @Override
+    public void tick() {
+        this.seed = calculator.advance(seed);
+        System.out.println("Advanced balls");
     }
 }

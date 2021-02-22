@@ -1,6 +1,8 @@
 package net.threads;
 
 import net.threads.model.*;
+import net.threads.time.CompositeTicker;
+import net.threads.time.TickerListener;
 import net.threads.time.TickerRunnable;
 import net.threads.view.SwingBallsView;
 
@@ -31,7 +33,11 @@ public class App {
 
         try {
             Thread.sleep(DELAY);
-            Thread ticker = new Thread(new TickerRunnable(500L, view));
+            List<TickerListener> listeners = new ArrayList<>(2);
+            listeners.add(ballModelView);
+            listeners.add(view);
+            TickerListener listener = new CompositeTicker(listeners);
+            Thread ticker = new Thread(new TickerRunnable(500L, listener));
             ticker.start();
         } catch (InterruptedException ie) {
             System.err.println(ie.getMessage());
