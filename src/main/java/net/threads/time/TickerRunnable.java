@@ -13,12 +13,10 @@ public class TickerRunnable implements Runnable {
     public void run() {
         long previousTick = System.currentTimeMillis();
         while(true) {
-            boolean ticked = false;
             long currentTime = System.currentTimeMillis();
             long timeDiff = currentTime - previousTick;
             if (timeDiff > TICK_RESOLUTION) {
                 listener.tick();
-                ticked = true;
                 previousTick = currentTime;
             }
             long timeToWait = previousTick + TICK_RESOLUTION - currentTime;
@@ -29,8 +27,6 @@ public class TickerRunnable implements Runnable {
                 ie.printStackTrace(System.err);
                 System.err.flush();
             }
-            System.out.println(String.format("Ticker: %1$d Tick?: %2$s Diff: %3$d Resolution: %4$d PreviousTick: %5$d", currentTime, ticked, timeDiff, TICK_RESOLUTION, previousTick));
-            System.out.flush();
         }
     }
 }

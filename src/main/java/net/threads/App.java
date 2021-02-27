@@ -5,8 +5,10 @@ import net.threads.time.CompositeTicker;
 import net.threads.time.TickerListener;
 import net.threads.time.TickerRunnable;
 import net.threads.view.SwingBallsView;
+import net.threads.view.SwingResizeComponentListener;
 
 import java.awt.*;
+import java.awt.event.ComponentListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,9 +27,10 @@ public class App {
 
         Bounds bounds = getBoundsFromCommandLineArgs(args);
         BallState seed = new BallState(balls, bounds);
-        BallCalculator calculator = new BallCalculatorImpl(bounds);
+        BallCalculatorImpl calculator = new BallCalculatorImpl(bounds);
+        ComponentListener boundListener = new SwingResizeComponentListener(calculator);
         BallModelView ballModelView = new CalcOnDemandBallModelView(calculator, seed);
-        SwingBallsView view = new SwingBallsView(ballModelView);
+        SwingBallsView view = new SwingBallsView(ballModelView, boundListener);
 
         view.run();
 

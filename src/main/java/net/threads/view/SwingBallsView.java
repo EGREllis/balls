@@ -5,15 +5,18 @@ import net.threads.time.TickerListener;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentListener;
 import java.lang.reflect.InvocationTargetException;
 
 public class SwingBallsView implements Runnable, TickerListener {
     private final BallModelView modelView;
+    private final ComponentListener resizeListener;
     private JFrame jFrame;
     private BallsCanvas canvas;
 
-    public SwingBallsView(BallModelView modelView) {
+    public SwingBallsView(BallModelView modelView, ComponentListener resizeListener) {
         this.modelView = modelView;
+        this.resizeListener = resizeListener;
     }
 
     @Override
@@ -33,6 +36,7 @@ public class SwingBallsView implements Runnable, TickerListener {
 
         jFrame.pack();
         jFrame.setVisible(true);
+        jFrame.addComponentListener(resizeListener);
     }
 
     @Override

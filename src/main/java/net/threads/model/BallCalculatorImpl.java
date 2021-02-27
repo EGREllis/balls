@@ -21,6 +21,7 @@ public class BallCalculatorImpl implements BallCalculator, BoundListener {
 
     @Override
     public void boundsChanged(Bounds bounds) {
+        System.out.println(String.format("Bounds have been changed: %1$s", bounds));
         this.bounds = bounds;
     }
 }
