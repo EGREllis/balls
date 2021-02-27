@@ -45,11 +45,12 @@ public class Ball {
 
     public String toString() {
         StringBuffer buffer = new StringBuffer();
-        buffer.append(String.format("Color %1$s (x,y): (%2$f,%3$f) (dx,dy): (%4$f %5$f)", color, cx, cy, dx, dy));
+        buffer.append(String.format("Color %1$s (x,y): (%2$f,%3$f) (dx,dy): (%4$f %5$f) radius: %5$f", color, cx, cy, dx, dy, radius));
         return buffer.toString();
     }
 
     public Ball advance(Bounds bounds) {
+        Ball newBall = null;
         double newX = cx+dx;
         double newY = cy+dy;
         double newDx = dx;
@@ -59,32 +60,40 @@ public class Ball {
             double overshoot = (newX - radius) * -1;
             newX = radius + overshoot;
             newDx = dx * -1;
-            logContact("Left");
+            newBall = new Ball(color, radius, newX, newY, newDx, newDy);
+            logContact("Left", newBall, bounds);
         } else if (newX + radius > bounds.getWidth()) {
             // Calculate overshoot for rebound
             double overshoot = (newX + radius) - bounds.getWidth();
             newX = bounds.getWidth() - overshoot;
             newDx = dx * -1;
-            logContact("Right");
+            newBall = new Ball(color, radius, newX, newY, newDx, newDy);
+            logContact("Right", newBall, bounds);
         }
         if (newY - radius < 0) {
             // Calculate overshoot for rebound
             double overshoot = (newY - radius) * -1;
             newY = radius + overshoot;
             newDy = dy * -1;
-            logContact("Top");
+            newBall = new Ball(color, radius, newX, newY, newDx, newDy);
+            logContact("Top", newBall, bounds);
         } else if (newY + radius > bounds.getHeight()) {
             // Calculate overshoot for rebound
             double overshoot = (newY + radius) - bounds.getHeight();
             newY = bounds.getHeight() - overshoot - radius;
             newDy = dy * -1;
-            logContact("Bottom");
+            newBall = new Ball(color, radius, newX, newY, newDx, newDy);
+            logContact("Bottom", newBall, bounds);
         }
         return new Ball(color, radius, newX, newY, newDx, newDy);
     }
 
-    private void logContact(String message) {
-        System.out.println(String.format("%1$s %2$s", message, this.toString()));
+    private void logContact(String message, Ball next, Bounds bound) {
+        System.out.println(String.format("%1$s prev: %2$s next: %3$s color: %4$s bound: (%5$d, %6$d)", message, getBallGeometry(this), getBallGeometry(next), color, bound.getWidth(), bound.getHeight()));
         System.out.flush();
+    }
+
+    private String getBallGeometry(Ball ball) {
+        return String.format("(x,y): (%1$f, %2$f) (dx,dy): (%3$f, %4$f) radius: %5$f", ball.cx, ball.cy, ball.dx, ball.dy, ball.radius);
     }
 }
