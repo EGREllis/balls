@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BallCalculatorImpl implements BallCalculator, BoundListener {
-    private Bounds bounds;
+    private volatile Bounds bounds;
 
     public BallCalculatorImpl(Bounds bounds) {
         this.bounds = bounds;
@@ -12,11 +12,12 @@ public class BallCalculatorImpl implements BallCalculator, BoundListener {
 
     @Override
     public BallState advance(BallState balls) {
+        Bounds myBounds = bounds;
         List<Ball> results = new ArrayList<>(balls.getBalls().size());
         for (Ball ball : balls.getBalls()) {
-            results.add(ball.advance());
+            results.add(ball.advance(myBounds));
         }
-        return new BallState(results, bounds);
+        return new BallState(results, myBounds);
     }
 
     @Override
