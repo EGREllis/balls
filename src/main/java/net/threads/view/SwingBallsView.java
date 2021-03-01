@@ -1,6 +1,7 @@
 package net.threads.view;
 
 import net.threads.model.BallModelView;
+import net.threads.model.Bounds;
 import net.threads.time.TickerListener;
 
 import javax.swing.*;
@@ -11,10 +12,12 @@ import java.lang.reflect.InvocationTargetException;
 public class SwingBallsView implements Runnable, TickerListener {
     private final BallModelView modelView;
     private final ComponentListener resizeListener;
+    private Bounds bounds;
     private JFrame jFrame;
     private BallsCanvas canvas;
 
-    public SwingBallsView(BallModelView modelView, ComponentListener resizeListener) {
+    public SwingBallsView(BallModelView modelView, ComponentListener resizeListener, Bounds bounds) {
+        this.bounds = bounds;
         this.modelView = modelView;
         this.resizeListener = resizeListener;
     }
@@ -31,7 +34,7 @@ public class SwingBallsView implements Runnable, TickerListener {
 
         this.canvas = new BallsCanvas(modelView);
         canvas.setBackground(new Color(0, 0, 0));
-        canvas.setBounds(new Rectangle(0, 0, 400, 400));
+        canvas.setBounds(new Rectangle(0, 0, bounds.getWidth(), bounds.getHeight()));
         jFrame.add(canvas, BorderLayout.CENTER);
 
         jFrame.pack();
