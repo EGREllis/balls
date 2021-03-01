@@ -2,8 +2,8 @@ Todo:
 DONE 2021/02/22 03:49 - Change the drawing update to only update on tick - explicitly not to advance the balls on bounds resize.
 DONE Pre 2021/03/01 - Implement bounds checking on external bounds - if the window is enlarged, balls should only rebound on the enlarged bound.
 DONE 2021/03/01 20:29 - Implement bounds checking on external bounds - if the window is shrunk, move the ball to remain within the window.
-Implement collision detection on circles - detect collisions
-Implement collision detection on circles - change velocity based on momentum
+Implement collision detection on balls - detect collisions
+Implement collision detection on balls - change velocity based on momentum
 Implement concurrent calculation - calculate collisions in advance
 Implement concurrent calculation - recalculate when the bounds change
 Implement a GUI to allow the user to vary the time rate

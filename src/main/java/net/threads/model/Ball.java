@@ -105,7 +105,7 @@ public class Ball {
     }
 
     private void logContact(String message, Ball next, Bounds bound) {
-        System.out.println(String.format("%1$s prev: %2$s next: %3$s color: %4$s bound: (%5$d, %6$d)", message, getBallGeometry(this), getBallGeometry(next), color, bound.getWidth(), bound.getHeight()));
+        System.out.println(String.format("%1$s\tprev: %2$s\n\t\tnext: %3$s color: %4$s bound: (%5$d, %6$d)", message, getBallGeometry(this), getBallGeometry(next), color, bound.getWidth(), bound.getHeight()));
         System.out.flush();
     }
 
