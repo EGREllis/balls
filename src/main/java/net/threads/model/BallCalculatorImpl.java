@@ -15,7 +15,10 @@ public class BallCalculatorImpl implements BallCalculator, BoundListener {
         Bounds myBounds = bounds;
         List<Ball> results = new ArrayList<>(balls.getBalls().size());
         for (Ball ball : balls.getBalls()) {
-            results.add(ball.advance(myBounds));
+            Ball newBall = ball.advance(myBounds);
+            if (newBall != null) {
+                results.add(newBall);
+            }
         }
         return new BallState(results, myBounds);
     }

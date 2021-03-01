@@ -55,6 +55,22 @@ public class Ball {
         double newY = cy+dy;
         double newDx = dx;
         double newDy = dy;
+        if (cx + radius > bounds.getWidth()) {
+            newX = bounds.getWidth() - radius;
+            if (radius * 2 > bounds.getWidth()) {
+                System.out.println(String.format("Excluding ball coloured: %1$s", color));
+                System.out.flush();
+                return null;
+            }
+        }
+        if (cy + radius > bounds.getHeight()) {
+            newY = bounds.getHeight() - radius;
+            if (radius * 2 > bounds.getHeight()) {
+                System.out.println(String.format("Excluding ball coloured: %1$s", color));
+                System.out.flush();
+                return null;
+            }
+        }
         if (newX - radius < 0) {
             // Calculate overshoot for rebound
             double overshoot = (newX - radius) * -1;
