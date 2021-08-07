@@ -39,7 +39,7 @@ public class SwingBallsView implements Runnable, TickerListener {
 
         jFrame.pack();
         jFrame.setVisible(true);
-        jFrame.addComponentListener(resizeListener);
+        canvas.addComponentListener(resizeListener);
     }
 
     @Override
