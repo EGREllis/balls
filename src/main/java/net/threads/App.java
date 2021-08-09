@@ -15,11 +15,14 @@ import java.util.List;
 public class App {
     public static void main( String[] args ) {
         List<Ball> balls = new ArrayList<>();
-        balls.add(new Ball(1, new Color(255, 0 ,0), 10, 20, 20, 10, 10));
-        balls.add(new Ball(2, new Color(0,255, 0), 20, 40, 40, 20, 5));
-        balls.add(new Ball(3, new Color(0,0,255), 30, 60, 60, -10, -20));
 
         CommandLineArguments cli = CommandLineArguments.parseArgs(args);
+
+        if (cli.getNBalls() == 3) {
+            balls.add(new Ball(1, new Color(255, 0 ,0), 10, 20, 20, 10, 10));
+            balls.add(new Ball(2, new Color(0,255, 0), 20, 40, 40, 20, 5));
+            balls.add(new Ball(3, new Color(0,0,255), 30, 60, 60, -10, -20));
+        }
         Bounds bounds = cli.getBounds();
         BallState seed = new BallState(balls, bounds);
         BallCalculatorImpl calculator = new BallCalculatorImpl(bounds);

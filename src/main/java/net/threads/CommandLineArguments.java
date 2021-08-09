@@ -3,19 +3,23 @@ package net.threads;
 import net.threads.model.Bounds;
 
 public class CommandLineArguments {
+    private static final int DEFAULT_N_BALLS = 3;
     private static final long DEFAULT_TICK_COUNT = 500L;
     private static final int DEFAULT_WIDTH = 400;
     private static final int DEFAULT_HEIGHT = 400;
     private static final String CLI_WIDTH_KEY = "-w";
     private static final String CLI_HEIGHT_KEY = "-h";
     private static final String CLI_TICK_KEY = "-t";
+    private static final String CLI_N_BALLS_KEY = "-n";
 
     private final Bounds bounds;
     private final long tickCount;
+    private final int nBalls;
 
-    public CommandLineArguments(Bounds bounds, long tickCount) {
+    public CommandLineArguments(Bounds bounds, long tickCount, int nBalls) {
         this.bounds = bounds;
         this.tickCount = tickCount;
+        this.nBalls = nBalls;
     }
 
     public Bounds getBounds() {
@@ -26,14 +30,18 @@ public class CommandLineArguments {
         return tickCount;
     }
 
+    public int getNBalls() { return nBalls; }
+
     public static CommandLineArguments parseArgs(String[] args) {
         int widthIndex = indexOf(args, CLI_WIDTH_KEY);
         int heightIndex = indexOf(args, CLI_HEIGHT_KEY);
         int milliPerTickIndex = indexOf(args, CLI_TICK_KEY);
+        int nBallsIndex = indexOf(args, CLI_N_BALLS_KEY);
 
         int width = -1;
         int height = -1;
         long milli;
+        int nBalls;
         if (widthIndex < 0 && heightIndex < 0) {
             width = DEFAULT_WIDTH;
             height = DEFAULT_HEIGHT;
@@ -48,7 +56,12 @@ public class CommandLineArguments {
         } else {
             milli = Long.parseLong(args[milliPerTickIndex+1]);
         }
-        return new CommandLineArguments(new Bounds(height, width), milli);
+        if (nBallsIndex < 0) {
+            nBalls = DEFAULT_N_BALLS;
+        } else {
+            nBalls = Integer.parseInt(args[nBallsIndex] + 1);
+        }
+        return new CommandLineArguments(new Bounds(height, width), milli, nBalls);
     }
 
     private static int indexOf(String []args, String key) {
