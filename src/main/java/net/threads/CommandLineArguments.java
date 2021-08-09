@@ -59,7 +59,7 @@ public class CommandLineArguments {
         if (nBallsIndex < 0) {
             nBalls = DEFAULT_N_BALLS;
         } else {
-            nBalls = Integer.parseInt(args[nBallsIndex] + 1);
+            nBalls = Integer.parseInt(args[nBallsIndex+1]);
         }
         return new CommandLineArguments(new Bounds(height, width), milli, nBalls);
     }
