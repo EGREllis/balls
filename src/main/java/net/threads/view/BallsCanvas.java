@@ -23,6 +23,8 @@ public class BallsCanvas extends Canvas {
             int size = (int)(ball.getRadius() * 2);
             graphics.setColor(ball.getColor());
             graphics.fillOval(x, y, size, size);
+            graphics.setColor(ball.getOutline());
+            graphics.drawOval(x, y, size, size);
         }
     }
 }

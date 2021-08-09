@@ -5,15 +5,17 @@ import java.awt.*;
 public class Ball {
     private final long id;
     private final Color color;
+    private final Color outline;
     private final double radius;
     private final double cx;
     private final double cy;
     private final double dx;
     private final double dy;
 
-    public Ball(final long id, Color color, double radius, double cx, double cy, double dx, double dy) {
+    public Ball(final long id, Color color, Color outline, double radius, double cx, double cy, double dx, double dy) {
         this.id = id;
         this.color = color;
+        this.outline = outline;
         this.radius = radius;
         this.cx = cx;
         this.cy = cy;
@@ -27,6 +29,10 @@ public class Ball {
 
     public Color getColor() {
         return color;
+    }
+
+    public Color getOutline() {
+        return outline;
     }
 
     public double getRadius() {
@@ -99,14 +105,14 @@ public class Ball {
             double overshoot = (newX - radius) * -1;
             newX = radius + overshoot;
             newDx = dx * -1;
-            newBall = new Ball(id, color, radius, newX, newY, newDx, newDy);
+            newBall = new Ball(id, color, outline, radius, newX, newY, newDx, newDy);
             logContact("Left", newBall, bounds);
         } else if (newX + radius > bounds.getWidth()) {
             // Calculate overshoot for rebound
             double overshoot = (newX + radius) - bounds.getWidth();
             newX = bounds.getWidth() - overshoot;
             newDx = dx * -1;
-            newBall = new Ball(id, color, radius, newX, newY, newDx, newDy);
+            newBall = new Ball(id, color, outline, radius, newX, newY, newDx, newDy);
             logContact("Right", newBall, bounds);
         }
         if (newY - radius < 0) {
@@ -114,17 +120,17 @@ public class Ball {
             double overshoot = (newY - radius) * -1;
             newY = radius + overshoot;
             newDy = dy * -1;
-            newBall = new Ball(id, color, radius, newX, newY, newDx, newDy);
+            newBall = new Ball(id, color, outline, radius, newX, newY, newDx, newDy);
             logContact("Top", newBall, bounds);
         } else if (newY + radius > bounds.getHeight()) {
             // Calculate overshoot for rebound
             double overshoot = (newY + radius) - bounds.getHeight();
             newY = bounds.getHeight() - overshoot - radius;
             newDy = dy * -1;
-            newBall = new Ball(id, color, radius, newX, newY, newDx, newDy);
+            newBall = new Ball(id, color, outline, radius, newX, newY, newDx, newDy);
             logContact("Bottom", newBall, bounds);
         }
-        return new Ball(id, color, radius, newX, newY, newDx, newDy);
+        return new Ball(id, color, outline, radius, newX, newY, newDx, newDy);
     }
 
     private void logContact(String message, Ball next, Bounds bound) {
